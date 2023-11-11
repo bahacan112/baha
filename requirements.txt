@@ -25,7 +25,7 @@ jmespath==1.0.1
 keyboard==0.13.5
 Markdown==3.3.7
 martor==1.6.28
-mysqlclient==2.2.0
+
 numpy==1.26.1
 openpyxl==3.1.2
 outcome==1.2.0
