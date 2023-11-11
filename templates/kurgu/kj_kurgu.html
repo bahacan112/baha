@@ -1,0 +1,110 @@
+{% load static %}
+<html>
+<head>
+    <title>Firma bilgileri</title>
+    <script src="{% static 'kurgu/jquery-3.5.1.min.js'  %}"></script>
+    <link rel="stylesheet" href="{% static 'kurgu/table.css'  %}">
+</head>
+<body>
+
+    <table cellpadding="0"; cellspacing="0">
+        <thead>
+          <tr>
+            <th>   Firma Unvanı     </th>
+            <th>   Röportaj veren kişi   </th>
+            <th>Kişi unvanı</th>
+            <th>   Yayınlanma   </th>
+            <th>   Görseller   </th>
+            <th>   Kj Bilgileri   </th>
+            <th>   Afiş   </th>
+            <th>   Altyazı   </th>
+            <th>   Firma gönderim   </th>
+            <th>   Youtube  </th>
+            <th>Montaj</th>
+            <th>Yayın tarihi(gün/ay/yıl)</th>
+            <th>Yayın dakikasi</th>
+            <th>Durum</th>
+            <th>   Sunum   </th>
+          </tr>
+        </thead>
+        {% for kj in kj_list %}
+        <tr>
+            <td><span style="text-align: center;">  {{kj.company.company_name.name}}  </span></td>
+
+            <td><input style="text-align: center;" type="text" class="{{kj.id}}" value="{{kj.client}}" name="client" ></td>
+            <td><input style="text-align: center;" type="text" class="{{kj.id}}" value="{{kj.nikname}}" name="nikname" ></td>
+            
+            {% if kj.is_played %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="is_played" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="is_played" ></td>
+            {% endif %}
+
+            {% if kj.videos %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="videos" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="videos" ></td>
+            {% endif %}
+
+            {% if kj.kj_detials %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="kj_detials" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="kj_detials" ></td>
+            {% endif %}
+
+            {% if kj.banner %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="banner" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="banner" ></td>
+            {% endif %}
+
+            
+            {% if kj.subtitle %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="subtitle" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="subtitle" ></td>
+            {% endif %}
+            
+            {% if kj.is_sent %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="is_sent" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="is_sent" ></td>
+            {% endif %}
+            
+            {% if kj.montaj %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="montaj" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="montaj" ></td>
+            {% endif %}
+
+            {% if kj.youtube %}
+            <td><input style="text-align: center;" type="checkbox"  class="{{kj.id}}" name="youtube" checked></td>
+            {% else %}
+            <td><input style="text-align: center;" type="checkbox"  name="youtube" ></td>
+            {% endif %}
+
+            <td><input style="text-align: center;" type="text" name="play_date" id="datefield" placeholder="gün/ay/yıl" class="{{kj.id}}" maxlength="10" value="{{kj.play_date|date:'d/m/Y'}}"  ></td>
+            <td><input style="text-align: center;" type="text" class="{{kj.id}}" name="play_time_as_minuate" value="{{kj.play_time_as_minuate}}" /></td>
+
+            <td>
+            <select class="{{kj.id}}" name="status" >
+              <option value="{{kj.status.id}}">{{kj.status}}</option>
+              {% for x in statuses %}
+              {% if not x == kj.status %}
+              <option value="{{x.id}}">{{x.name}}</option>
+              {% endif %}
+              {% endfor %}
+            </select>
+            </td>
+
+            <td><textarea style="text-align: center;" type="text"  class="{{kj.id}}" name="presentation" >{{ kj.presentation }}</textarea></td>
+            
+          </tr>
+          {% endfor %}
+        </table>
+
+
+<script src="{% static 'kurgu/autocommit.js'  %}"></script>
+
+</html>
+

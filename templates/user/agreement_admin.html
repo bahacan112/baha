@@ -1,0 +1,114 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Firma bilgileri</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700" rel="stylesheet">
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css"
+    integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+  <link href="{% static 'list/css/single.css' %}" rel="stylesheet">
+</head>
+
+
+<body>
+  {% if message %}
+    <script>alert('{{message}}');</script>
+  {% endif %}
+  <form method="post" action="{% url 'reports:agreement_admin' agreement_id=agreement.id %}" style="width: 900px;">
+    <h4>Durum : <span>*</span></h4>
+    <div class="title-block">      
+      <select name="agreement_status" style="width: 210px;">
+        <option value="{{agreement.status.id}}">{{agreement.status}}</option>
+        {% for status in agreement_status %}
+        {% if not status == agreement.status %}
+        <option value="{{status.id}}">{{status.name}}</option>
+        {% endif %}
+        {% endfor %}
+      </select>
+    </div>
+    <br>
+  
+    <h4>Firma unvanı</h4>
+    <input name="company_name" value="{{agreement.company_name.name}}" style="width: 800px;" required>
+    <br>
+
+    <h4>İsim Soyisim</h4>
+    {% if agreement.person_name %}
+    <input name="person_name" value="{{agreement.person_name}}" style="width: 200px;" required>
+    {% else %}
+    <input name="person_name" value="" style="width: 200px;" required>
+    {% endif %}
+    <br>
+    <br>
+
+    <h4>Telefon numarası</h4>
+    {% if agreement.person_number %}
+    <input name="person_number" value="{{agreement.person_number}}" style="width: 200px;" required>
+    {% else %}
+    <input name="person_number" value="" style="width: 200px;" required>
+    {% endif %}
+    <br>
+    <br>
+
+    <h4>Whatsapp numarası</h4>
+    {% if agreement.whatsapp %}
+    <input name="whatsapp" value="{{agreement.whatsapp}}" style="width: 200px;" >
+    {% else %}
+    <input name="whatsapp" value="" style="width: 200px;" >
+    {% endif %}
+    <br>
+    <br>
+    
+    <h4>Mail Adresi</h4>
+    {% if agreement.mail %}
+    <input name="mail" value="{{agreement.mail}}" style="width: 200px;" >
+    {% else %}
+    <input name="mail" value="" style="width: 200px;" >
+    {% endif %}
+    <br>
+    <br>
+
+    <h4>Çekim yeri</h4>
+    {% if agreement.record_place %}
+    <input name="record_place" value="{{agreement.record_place}}" style="width: 200px;" >
+    {% else %}
+    <input name="record_place" value="" style="width: 200px;" >
+    {% endif %}
+    <br>
+    <br>
+
+    <h4>Not</h4>
+    {% if agreement.company_name.note %}
+    <textarea name="note" style="width: 200px;" >{{agreement.company_name.note}}</textarea>
+    {% else %}
+    <textarea name="note" style="width: 200px;" ></textarea>
+    {% endif %}
+    <br>
+    <br>
+
+    <h4>Sözleşme günü/saatı</h4>
+    <input type="datetime-local" name="created_date" datetime-local="MM-DD-YYYY HH:mm" value="{{agreement.created_date|date:'Y-m-d'}}T{{agreement.created_date|date:'H:i:s'}}" style="width: 200px;" required> 
+    <br>
+
+    <h4>Çekim günü/saatı</h4>
+    <input type="datetime-local" name="record_date" datetime-local="MM-DD-YYYY HH:mm" value="{{agreement.record_date|date:'Y-m-d'}}T{{agreement.record_date|date:'H:i:s'}}" style="width: 200px;" required>
+    <br>
+
+    <div class="btn-block">
+      <button type="submit" >Yazdır</button>
+    </div>
+
+    {% if agreement.whatsapp %}
+    <div class="btn-block">
+      <h2><a style="color: brown;" href="https://wa.me/90{{agreement.whatsapp}}?text=SEKTÖRÜN+ÖNCÜLERİ+OLARAK+KATILIM+FORMUNUZ+EK+OLARAK+TARAFINIZA+GÖNDERİLMİŞTİR.+AD%2FSOYAD+İMZA+VEYA+KAŞE+İMZA+ŞEKLİNDE+TARAFIMIZA+YÖNLENDİRMENİZ+ÇEKİM+TAKVİMİNE+ALINMANIZ+İÇİN+YETERLİ+OLACAKTIR.+İYİ+ÇALIŞMALAR+DİLERİZ&oq=SEKTÖRÜN+ÖNCÜLERİ+OLARAK+KATILIM+FORMUNUZ+EK+OLARAK+TARAFINIZA+GÖNDERİLMİŞTİR.+AD%2FSOYAD+İMZA+VEYA+KAŞE+İMZA+ŞEKLİNDE+TARAFIMIZA+YÖNLENDİRMENİZ+ÇEKİM+TAKVİMİNE+ALINMANIZ+İÇİN+YETERLİ+OLACAKTIR.+İYİ+ÇALIŞMALAR+DİLERİZ" target="_blank"> Whatsapptan Gönder </a></h2>
+    </div>
+    {% endif %}
+    <div class="btn-block">
+      <h2><a style="color: brown;" href="/" target="_blank"> Ana sayfa </a></h2>
+    </div>
+  </form>
+</body>
+
+</html>
