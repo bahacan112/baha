@@ -16,7 +16,6 @@ h11==0.14.0
 helium==3.2.6
 idna==3.4
 keyboard==0.13.5
-mysqlclient==2.2.0
 numpy==1.26.1
 openpyxl==3.1.2
 outcome==1.2.0
